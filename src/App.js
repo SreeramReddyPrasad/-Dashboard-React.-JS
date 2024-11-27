@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Container, Typography, Tab, Tabs, Box } from "@mui/material";
+import UserManagement from "./components/UserManagement";
+import RoleManagement from "./components/RoleManagement";
 
-function App() {
+const App = () => {
+  const [currentTab, setCurrentTab] = React.useState(0);
+
+  const handleTabChange = (event, newValue) => setCurrentTab(newValue);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Typography variant="h4" align="center" gutterBottom>
+        Admin Dashboard
+      </Typography>
+      <Tabs value={currentTab} onChange={handleTabChange} centered>
+        <Tab label="User Management" />
+        <Tab label="Role Management" />
+      </Tabs>
+      <Box mt={4}>
+        {currentTab === 0 && <UserManagement />}
+        {currentTab === 1 && <RoleManagement />}
+      </Box>
+    </Container>
   );
-}
+};
 
 export default App;
